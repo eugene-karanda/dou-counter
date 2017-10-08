@@ -1,34 +1,47 @@
 package org.overmind.doucounter.feed;
 
-import lombok.Builder;
-import lombok.Singular;
-import lombok.ToString;
-import lombok.Value;
-
-import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * @author eugene.karanda
  * @version 1.0 Create: 08.10.2017 23:38
  */
-@Value
-@Builder
-@ToString(exclude = "entries")
-public class Feed {
+@XmlRootElement(name = "rss")
+public final class Feed {
 
-    String title;
+    @XmlElement
+    private Channel channel;
 
-    String link;
+    private Feed() {
+    }
 
-    String description;
+    public Feed(Channel channel) {
+        this.channel = channel;
+    }
 
-    String language;
+    public Channel getChannel() {
+        return channel;
+    }
 
-    String copyright;
+    @Override
+    public String toString() {
+        return "Feed{" +
+                "channel=" + channel +
+                '}';
+    }
 
-    String pubDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Feed feed = (Feed) o;
+        return Objects.equals(channel, feed.channel);
+    }
 
-    @Singular
-    List<FeedMessage> entries;
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(channel);
+    }
 }
