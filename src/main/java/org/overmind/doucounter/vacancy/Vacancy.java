@@ -1,28 +1,30 @@
 package org.overmind.doucounter.vacancy;
 
-
-import java.util.List;
+import lombok.Builder;
+import lombok.Value;
 
 /**
  * @author eugene.karanda
  * @version 1.0 Create: 09.10.2017 1:31
  */
+@Value
+@Builder
 public class Vacancy {
 
-    private List<String> requiredSkills;
+    String link;
 
-    private List<String> additionalSkills;
+    String requiredSkills;
 
-    private List<String> bePlus;
+    String additionalSkills;
 
-    private List<String> weOffer;
+    String bePlus;
 
-    private List<String> bonuses;
+    String weOffers;
 
-    private List<String> duties;
+    String bonuses;
 
-    private List<String> aboutProject;
+    String duty;
 
-    private String link;
+    String aboutProject;
 
 }

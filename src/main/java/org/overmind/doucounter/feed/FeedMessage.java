@@ -1,85 +1,38 @@
 package org.overmind.doucounter.feed;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlElement;
-import java.util.Objects;
 
 /**
  * @author eugene.karanda
  * @version 1.0 Create: 08.10.2017 23:36
  */
+@Getter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public final class FeedMessage {
 
-    @XmlElement
+    @XmlElement(name = "title")
     private String title;
 
-    @XmlElement
+    @XmlElement(name = "description")
     private String description;
 
-    @XmlElement
+    @XmlElement(name = "link")
     private String link;
 
-    @XmlElement
+    @XmlElement(name = "author")
     private String author;
 
-    @XmlElement
+    @XmlElement(name = "guid")
     private String guid;
 
-    private FeedMessage() {
-    }
-
-    public FeedMessage(String title, String description, String link, String author, String guid) {
-        this.title = title;
-        this.description = description;
-        this.link = link;
-        this.author = author;
-        this.guid = guid;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    @Override
-    public String toString() {
-        return "FeedMessage{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", link='" + link + '\'' +
-                ", author='" + author + '\'' +
-                ", guid='" + guid + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FeedMessage that = (FeedMessage) o;
-        return Objects.equals(title, that.title) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(link, that.link) &&
-                Objects.equals(author, that.author) &&
-                Objects.equals(guid, that.guid);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, link, author, guid);
-    }
 }

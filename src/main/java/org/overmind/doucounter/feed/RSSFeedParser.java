@@ -6,5 +6,5 @@ package org.overmind.doucounter.feed;
  */
 public interface RSSFeedParser {
 
-    Feed readFeed() throws RSSFeedParserException;
+    Feed parse() throws RSSFeedParsingException;
 }

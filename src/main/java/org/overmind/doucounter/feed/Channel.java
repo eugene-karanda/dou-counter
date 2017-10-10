@@ -1,105 +1,45 @@
 package org.overmind.doucounter.feed;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author eugene.karanda
  * @version 1.0 Create: 09.10.2017 2:24
  */
+@Getter
+@ToString(exclude = "messages")
+@EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public final class Channel {
 
-    @XmlElement
+    @XmlElement(name = "title")
     private String title;
 
-    @XmlElement
+    @XmlElement(name = "link")
     private String link;
 
-    @XmlElement
+    @XmlElement(name = "description")
     private String description;
 
-    @XmlElement
+    @XmlElement(name = "language")
     private String language;
 
-    @XmlElement
+    @XmlElement(name = "copyright")
     private String copyright;
 
-    @XmlElement
-    private String pubDate;
+    @XmlElement(name = "pubDate")
+    private String publicationDate;
 
     @XmlElement(name = "item")
     private List<FeedMessage> messages;
 
-    private Channel() {
-    }
-
-    public Channel(String title, String link, String description, String language, String copyright, String pubDate, List<FeedMessage> messages) {
-        this.title = title;
-        this.link = link;
-        this.description = description;
-        this.language = language;
-        this.copyright = copyright;
-        this.pubDate = pubDate;
-        this.messages = messages;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public String getCopyright() {
-        return copyright;
-    }
-
-    public String getPubDate() {
-        return pubDate;
-    }
-
-    public List<FeedMessage> getMessages() {
-        return messages;
-    }
-
-    @Override
-    public String toString() {
-        return "Feed{" +
-                "title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", description='" + description + '\'' +
-                ", language='" + language + '\'' +
-                ", copyright='" + copyright + '\'' +
-                ", pubDate='" + pubDate + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Channel channel = (Channel) o;
-        return Objects.equals(title, channel.title) &&
-                Objects.equals(link, channel.link) &&
-                Objects.equals(description, channel.description) &&
-                Objects.equals(language, channel.language) &&
-                Objects.equals(copyright, channel.copyright) &&
-                Objects.equals(pubDate, channel.pubDate) &&
-                Objects.equals(messages, channel.messages);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, link, description, language, copyright, pubDate, messages);
-    }
 }

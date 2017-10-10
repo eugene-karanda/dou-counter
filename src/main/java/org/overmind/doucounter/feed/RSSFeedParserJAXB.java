@@ -19,21 +19,25 @@ public final class RSSFeedParserJAXB implements RSSFeedParser {
         this.is = is;
     }
 
-    public static RSSFeedParserJAXB create(URL url) throws IOException {
+    public static RSSFeedParserJAXB create(InputStream is) throws IOException {
+        return new RSSFeedParserJAXB(is);
+    }
+
+    public static RSSFeedParserJAXB fromURL(URL url) throws IOException {
         return new RSSFeedParserJAXB(url.openStream());
     }
 
-    public static RSSFeedParserJAXB create(String url) throws IOException {
-        return create(new URL(url));
+    public static RSSFeedParserJAXB fromURL(String url) throws IOException {
+        return fromURL(new URL(url));
     }
 
-    public Feed readFeed() throws RSSFeedParserException {
+    public Feed parse() throws RSSFeedParsingException {
         try {
             final JAXBContext jaxbContext = JAXBContext.newInstance(Feed.class, Channel.class, FeedMessage.class);
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             return  (Feed) unmarshaller.unmarshal(is);
         } catch (JAXBException e) {
-            throw new RSSFeedParserException("Exception during reading", e);
+            throw new RSSFeedParsingException("Exception during reading", e);
         }
     }
 }
